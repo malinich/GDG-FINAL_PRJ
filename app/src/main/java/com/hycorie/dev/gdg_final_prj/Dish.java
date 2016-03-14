@@ -1,6 +1,8 @@
 package com.hycorie.dev.gdg_final_prj;
 
 import android.net.Uri;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -8,9 +10,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
-public class Dish extends Product{
+public class Dish extends Product implements Parcelable{
     static final String ID = "id";
     static final String NAME = "name";
     static final String DESCRIPTION = "description";
@@ -103,5 +106,41 @@ public class Dish extends Product{
     @Override
     public String toString() {
         return getName();
+    }
+
+    private int mData;
+
+    // parcel
+    public int describeContents() {
+        return 0;
+    }
+
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeInt(getId());
+        out.writeString(getName());
+        out.writeString(getDescription());
+        out.writeList(getIngredients());
+        out.writeString(getImage().toString());
+    }
+
+    public static final Parcelable.Creator<Dish> CREATOR = new Parcelable.Creator<Dish>() {
+
+        public Dish createFromParcel(Parcel in) {
+            return new Dish(in);
+        }
+
+        public Dish[] newArray(int size) {
+            return new Dish[size];
+        }
+    };
+
+    private Dish(Parcel in) {
+        mIngredients = new ArrayList<String>();
+
+        this.setId(in.readInt());
+        this.setName(in.readString());
+        this.setDescription(in.readString());
+        in.readList(mIngredients, null);
+        this.setImage(in.readString());
     }
 }

@@ -1,6 +1,7 @@
 package com.hycorie.dev.gdg_final_prj;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,8 +19,10 @@ import android.widget.TextView;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 
@@ -230,8 +233,9 @@ public class MainActivity extends AppCompatActivity{
     private class DishClickListener implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Log.d("aaaaa", String.valueOf(position));
-
+            Intent i = new Intent(MainActivity.this, DishActivity.class);
+            i.putExtra("DISH", filteredDishes.get(position));
+            startActivity(i);
         }
     }
 
@@ -243,18 +247,15 @@ public class MainActivity extends AppCompatActivity{
             mContext = context;
         }
 
-//        @Override
+        // TODO: not work
         public View getView_(int position, View convertView, ViewGroup parent) {
-
             if(convertView == null){
 
                 LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 convertView = inflater.inflate(R.layout.dish_item, parent,false);
 
-            }// End if
-
+            }
             TextView textView = (TextView)convertView.findViewById(R.id.dish_id);
-
             Dish dish = getItem(position);
             textView.setText(dish.getId()+"" +dish.getName());
 
