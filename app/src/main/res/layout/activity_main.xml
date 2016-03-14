@@ -107,6 +107,12 @@
             grid:layout_column="2"/>
     </android.support.v7.widget.GridLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray">
+
+    </View>
         <ListView
             android:id="@+id/dish_items"
             android:layout_width="match_parent"

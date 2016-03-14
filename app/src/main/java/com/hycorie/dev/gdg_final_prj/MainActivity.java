@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity{
         catch (Exception e){
             throw new RuntimeException(e);
         }
-        mGoodsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, mIngredientList);
+        mGoodsAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, mIngredientList);
         mGoodsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     }
 
