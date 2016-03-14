@@ -19,12 +19,14 @@ public class Dish extends Product implements Parcelable{
     static final String DESCRIPTION = "description";
     static final String INGREDIENTS = "ingredients";
     static final String IMAGE = "image";
+    static final String SCORE = "score";
 
     private Integer mId;
     private List<String> mIngredients;
     private String mDescription;
     private String mName;
     private Uri mImage;
+    private Integer mScore;
 
     public Dish(JSONObject jo) throws JSONException {
         this.setId(jo.getInt(ID));
@@ -32,6 +34,7 @@ public class Dish extends Product implements Parcelable{
         this.setDescription(jo.getString(DESCRIPTION));
         this.setIngredients(jo.getString(INGREDIENTS));
         this.setImage(jo.getString(IMAGE));
+        this.setScore(jo.getInt(SCORE));
     }
 
     public Dish() {
@@ -86,6 +89,14 @@ public class Dish extends Product implements Parcelable{
         mImage = Uri.parse(image);
     }
 
+    public Integer getScore() {
+        return mScore;
+    }
+
+    public void setScore(Integer score) {
+        mScore = score;
+    }
+
     @Override
     public JSONObject convertToJSON() throws JSONException{
         JSONObject jo = new JSONObject();
@@ -95,6 +106,7 @@ public class Dish extends Product implements Parcelable{
         jo.put(DESCRIPTION, mDescription);
         jo.put(INGREDIENTS, mIngredients);
         jo.put(IMAGE, mImage);
+        jo.put(SCORE, mScore);
 
         return jo;
     }
@@ -121,6 +133,7 @@ public class Dish extends Product implements Parcelable{
         out.writeString(getDescription());
         out.writeList(getIngredients());
         out.writeString(getImage().toString());
+        out.writeInt(getScore());
     }
 
     public static final Parcelable.Creator<Dish> CREATOR = new Parcelable.Creator<Dish>() {
@@ -142,5 +155,6 @@ public class Dish extends Product implements Parcelable{
         this.setDescription(in.readString());
         in.readList(mIngredients, null);
         this.setImage(in.readString());
+        this.setScore(in.readInt());
     }
 }

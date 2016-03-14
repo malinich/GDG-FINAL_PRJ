@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity{
                 add("potato");
                 add("fish");
             }});
+            setScore(5);
             setImage(Uri.parse("android.resource://" + getPackageName() + "/" + R.drawable.banana_puree));
         }};
 
@@ -92,6 +93,7 @@ public class MainActivity extends AppCompatActivity{
                 add("маракуйя");
                 add("маракуйя");
             }});
+            setScore(4);
             setImage(Uri.parse("android.resource://" + getPackageName() + "/" + R.drawable.passionfruit_puree));
         }};
         d.add(d1);
@@ -146,7 +148,7 @@ public class MainActivity extends AppCompatActivity{
                 List<String> items = getSpinerItems();
                 filteredDishes = getDishesDataByIngredients(items, getDishesData());
 
-                DishArrayAdapter adapter = new DishArrayAdapter(MainActivity.this,android.R.layout.simple_list_item_1, filteredDishes);
+                DishArrayAdapter adapter = new DishArrayAdapter(MainActivity.this, R.layout.dish_item, filteredDishes);
 
                 sv.setAdapter(adapter);
                 sv.setOnItemClickListener(new DishClickListener());
@@ -247,17 +249,20 @@ public class MainActivity extends AppCompatActivity{
             mContext = context;
         }
 
-        // TODO: not work
-        public View getView_(int position, View convertView, ViewGroup parent) {
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
             if(convertView == null){
 
                 LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 convertView = inflater.inflate(R.layout.dish_item, parent,false);
 
             }
-            TextView textView = (TextView)convertView.findViewById(R.id.dish_id);
+            TextView textView = (TextView)convertView.findViewById(R.id.dish_name);
+            TextView score = (TextView)convertView.findViewById(R.id.dish_score);
+
             Dish dish = getItem(position);
-            textView.setText(dish.getId()+"" +dish.getName());
+            textView.setText(dish.getName());
+            score.setText(dish.getScore().toString());
 
             return convertView;
         }
