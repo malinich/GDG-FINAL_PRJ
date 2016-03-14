@@ -37,5 +37,12 @@ public class DishActivity extends AppCompatActivity {
         ListView sv = (ListView) findViewById(R.id.dish_ingredients);
         ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mDish.getIngredients());
         sv.setAdapter(adapter);
+
+        TextView description = (TextView)findViewById(R.id.dish_description);
+        description.setText(mDish.getDescription());
+
+        TextView score = (TextView)findViewById(R.id.dish_score);
+        score.setText(mDish.getScore().toString());
+
     }
 }
