@@ -1,15 +1,13 @@
 package com.hycorie.dev.gdg_final_prj;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import java.util.List;
 
 public class DishActivity extends AppCompatActivity {
     private Dish mDish;

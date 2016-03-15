@@ -1,8 +1,6 @@
 package com.hycorie.dev.gdg_final_prj;
 
 
-import java.util.Arrays;
-
 public class SpinStorage {
     private int mCapacity;
     private FixedSizeList<SpinController> mStorage;

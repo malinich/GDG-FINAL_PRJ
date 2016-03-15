@@ -2,8 +2,6 @@ package com.hycorie.dev.gdg_final_prj;
 
 import android.content.Context;
 
-import com.google.gson.reflect.TypeToken;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
