@@ -2,7 +2,6 @@ package com.hycorie.dev.gdg_final_prj;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -16,13 +15,10 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import org.json.JSONException;
+import com.hycorie.dev.gdg_final_prj.Util.JSONStore;
 
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 
@@ -36,8 +32,8 @@ public class MainActivity extends AppCompatActivity{
 
     public static final String JSON_FILE_INGREDIENTS = "ingredients.json";
     public static final String JSON_FILE_DISHES = "dishes.json";
-    private ProductSerializer<Ingredient> mIngredientSerializer;
-    private ProductSerializer<Dish> mDishSerializer;
+    private ProductSerializer<Product> mIngredientSerializer;
+    private ProductSerializer<Product> mDishSerializer;
     private SpinStorage mStorage;
 
     @Override
@@ -57,67 +53,13 @@ public class MainActivity extends AppCompatActivity{
         mIngredientSerializer = new ProductSerializer<>(JSON_FILE_INGREDIENTS, this);
         mDishSerializer = new ProductSerializer<>(JSON_FILE_DISHES, this);
 
-        List<Ingredient> p = new ArrayList<>();
-        Ingredient p1 = new Ingredient();
-        p1.setId(1);
-        p1.setName("банан");
-        p1.setImage(Uri.parse("android.resource://" + getPackageName() + "/" + R.drawable.banana));
-        p.add(p1);
+        JSONStore jsonStore = new JSONStore();
+        jsonStore.setSerializer(mIngredientSerializer);
+        jsonStore.createIngredients();
 
-        Ingredient p2 = new Ingredient();
-        p2.setId(2);
-        p2.setName("маракуйя");
-        p2.setImage(Uri.parse("android.resource://" + getPackageName() + "/" + R.drawable.passionfruit));
-        p.add(p2);
+        jsonStore.setSerializer(mDishSerializer);
+        jsonStore.createDishes();
 
-        List<Dish> d = new ArrayList<>();
-        Dish d1 = new Dish(){{
-            setId(1);
-            setName("Банана пюре");
-            setDescription("Очень вкусная балалайка");
-            setIngredients(new ArrayList<String>() {{
-                add("банан");
-                add("potato");
-                add("fish");
-            }});
-            setScore(5);
-            setImage(Uri.parse("android.resource://" + getPackageName() + "/" + R.drawable.banana_puree));
-        }};
-
-        Dish d2 = new Dish(){{
-            setId(2);
-            setName("Маракуйя пюре");
-            setDescription("Очень вкусная маракушка");
-            setIngredients(new ArrayList<String>() {{
-                add("маракуйя");
-                add("маракуйя");
-                add("маракуйя");
-            }});
-            setScore(4);
-            setImage(Uri.parse("android.resource://" + getPackageName() + "/" + R.drawable.passionfruit_puree));
-        }};
-        d.add(d1);
-        d.add(d2);
-        d.add(d2);
-        d.add(d2);
-        d.add(d2);
-        d.add(d2);
-        d.add(d2);
-        d.add(d2);
-        d.add(d2);
-        d.add(d2);
-        d.add(d2);
-        d.add(d2);
-        d.add(d2);
-        d.add(d2);
-
-        try {
-            mIngredientSerializer.save(p);
-            mDishSerializer.save(d);
-        }
-        catch (IOException |JSONException e){
-            throw new RuntimeException(e.toString());
-        }
     }
 
     private void addAdapter() {

@@ -35,14 +35,11 @@ public class ProductSerializer<T extends Product> {
 
     public void save(List<T> products) throws IOException, JSONException{
 
-        // Make an array in JSON format
         JSONArray jArray = new JSONArray();
 
-        // And load it with the notes
         for (T p : products)
             jArray.put(p.convertToJSON());
 
-        // Now write it to the private disk space of our app
         Writer writer = null;
         try {
             OutputStream out = mContext.openFileOutput(mFilename, mContext.MODE_PRIVATE);
@@ -58,8 +55,8 @@ public class ProductSerializer<T extends Product> {
     }
 
 
-    public ArrayList<T> load(Class<T> cls) throws Exception{
-        ArrayList<T> productList = new ArrayList<>();
+    public <E> ArrayList<E> load(Class<E> cls) throws Exception{
+        ArrayList<E> productList = new ArrayList<>();
         BufferedReader reader = null;
 
         try {
