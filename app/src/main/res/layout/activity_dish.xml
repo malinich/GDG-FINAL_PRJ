@@ -37,7 +37,6 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true">
             <TextView
-                android:fontFamily="sans-serif-light"
                 android:paddingTop="8dp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:layout_width="wrap_content"
@@ -47,7 +46,6 @@
                 android:textColor="#ffffff"/>
 
             <TextView
-                android:fontFamily="sans-serif-light"
                 android:id="@+id/dish_score"
                 android:text="5"
                 android:textSize="20dp"
@@ -74,7 +72,6 @@
     <TextView
         android:paddingTop="@dimen/vertical_margin"
         android:paddingLeft="@dimen/vertical_margin"
-        android:fontFamily="sans-serif-light"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -84,7 +81,6 @@
     <TextView
         android:paddingLeft="@dimen/vertical_margin"
         android:paddingTop="@dimen/margin_half"
-        android:fontFamily="sans-serif-light"
         android:id="@+id/dish_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
@@ -92,7 +88,6 @@
     <TextView
         android:paddingLeft="@dimen/vertical_margin"
         android:paddingTop="@dimen/vertical_margin"
-        android:fontFamily="sans-serif-light"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

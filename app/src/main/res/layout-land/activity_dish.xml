@@ -26,7 +26,6 @@
                     android:background="#ffffff"/>
 
                 <TextView
-                    android:fontFamily="sans-serif-light"
                     android:id="@+id/dish_name"
                     android:text="Passion fruit something aka mydir"
                     android:paddingLeft="@dimen/vertical_margin"
@@ -42,9 +41,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true">
-
                     <TextView
-                        android:fontFamily="sans-serif-light"
                         android:paddingTop="@dimen/vertical_margin"
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:layout_width="wrap_content"
@@ -54,7 +51,6 @@
                         android:textColor="#ffffff"/>
 
                     <TextView
-                        android:fontFamily="sans-serif-light"
                         android:id="@+id/dish_score"
                         android:text="5"
                         android:textSize="20dp"
@@ -79,7 +75,6 @@
             </RelativeLayout>
 
             <TextView
-                android:fontFamily="sans-serif-light"
                 android:paddingTop="@dimen/vertical_margin"
                 android:paddingLeft="@dimen/vertical_margin"
                 android:textAppearance="?android:attr/textAppearanceMedium"
@@ -89,7 +84,6 @@
                 android:text="Описание:"/>
 
             <TextView
-                android:fontFamily="sans-serif-light"
                 android:paddingTop="@dimen/margin_half"
                 android:paddingLeft="@dimen/vertical_margin"
                 android:id="@+id/dish_description"
@@ -97,7 +91,6 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:fontFamily="sans-serif-light"
                 android:paddingLeft="@dimen/vertical_margin"
                 android:paddingTop="@dimen/vertical_margin"
                 android:textAppearance="?android:attr/textAppearanceMedium"
@@ -111,7 +104,6 @@
                     android:id="@+id/dish_ingredients_land"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent">
-
                 </LinearLayout>
 
         </LinearLayout>

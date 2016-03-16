@@ -3,7 +3,6 @@
           android:id="@android:id/text1"
           style="?android:attr/spinnerItemStyle"
           android:textAppearance="?android:attr/textAppearanceListItemSmall"
-          android:fontFamily="sans-serif-light"
           android:singleLine="true"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
