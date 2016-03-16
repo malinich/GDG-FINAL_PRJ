@@ -35,7 +35,6 @@
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             android:id="@+id/imageView1"
-
             grid:layout_row="0"
             grid:layout_column="0"
             grid:layout_gravity="center"
@@ -81,7 +80,6 @@
             android:gravity="center"
             grid:layout_columnWeight="1"
             grid:layout_gravity="fill_horizontal"
-            android:text="[Select a Food...]"
             grid:layout_column="0"/>
 
         <Spinner
