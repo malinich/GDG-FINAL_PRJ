@@ -18,6 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/activity_main_welcome"
+            android:fontFamily="sans-serif-light"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
         <LinearLayout
@@ -115,7 +116,6 @@
                     grid:layout_gravity="fill_vertical"
                     grid:layout_column="0"/>
             </android.support.v7.widget.GridLayout>
-
 
             <View
                 android:layout_width="1dp"
