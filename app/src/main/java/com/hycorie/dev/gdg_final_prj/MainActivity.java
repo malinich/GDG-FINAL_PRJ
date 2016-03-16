@@ -11,9 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ExpandableListView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -96,7 +94,12 @@ public class MainActivity extends AppCompatActivity{
 
                 DishArrayAdapter adapter = new DishArrayAdapter(MainActivity.this, R.layout.dish_item, filteredDishes);
                 sv.setAdapter(adapter);
-                setListViewHeightBasedOnChildren(sv);
+
+                int orientation = getResources().getConfiguration().orientation;
+
+                if (orientation == Configuration.ORIENTATION_LANDSCAPE){
+                    setListViewHeightBasedOnChildren(sv);
+                }
                 sv.setOnItemClickListener(new DishClickListener());
             }
 
