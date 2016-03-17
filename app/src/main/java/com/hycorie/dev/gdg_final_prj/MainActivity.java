@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,7 +21,7 @@ import android.widget.TextView;
 import com.hycorie.dev.gdg_final_prj.Util.JSONStore;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -103,12 +104,13 @@ public class MainActivity extends AppCompatActivity{
                 sv.setOnItemClickListener(new DishClickListener());
             }
 
-            private List<Dish> getDishesDataByIngredients(List<String> items, List<Dish> dishes) {
+            private List<Dish> getDishesDataByIngredients(Collection<String> items, List<Dish> dishes) {
                 List<Dish> result = new ArrayList<>();
-                for (Dish dish: dishes){
-                    boolean b = Collections.disjoint(items, dish.getIngredients());
 
-                    if (!b){
+                for (Dish dish: dishes){
+                    Collection ingredientsName = dish.getIngredientsName();
+
+                    if (!items.retainAll(ingredientsName)){
                         result.add(dish);
                     }
                 }
@@ -122,7 +124,7 @@ public class MainActivity extends AppCompatActivity{
                     dishes = serializer.load(Dish.class);
                 }
                 catch (Exception e){
-                    Log.d("error serializer", e.getMessage());
+                    Log.d("error serializer", String.valueOf(e));
                 }
                 return dishes;
             }
@@ -209,7 +211,7 @@ public class MainActivity extends AppCompatActivity{
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             Intent i = new Intent(MainActivity.this, DishActivity.class);
-            i.putExtra("DISH", filteredDishes.get(position));
+            i.putExtra("DISH", (Parcelable)filteredDishes.get(position));
             startActivity(i);
         }
     }

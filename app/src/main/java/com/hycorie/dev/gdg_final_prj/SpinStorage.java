@@ -2,7 +2,7 @@ package com.hycorie.dev.gdg_final_prj;
 
 
 public class SpinStorage {
-    private int mCapacity;
+    private static int mCapacity = 3;
     private FixedSizeList<SpinController> mStorage;
     private SpinHandler mSpinHandler;
 
@@ -13,7 +13,6 @@ public class SpinStorage {
     }
 
     private SpinStorage() {
-        mCapacity = 3;
         mStorage = new FixedSizeList<SpinController>(mCapacity);
     }
 
@@ -32,5 +31,9 @@ public class SpinStorage {
 
     public FixedSizeList<SpinController> getStorage() {
         return mStorage;
+    }
+
+    public static int getCapacity() {
+        return mCapacity;
     }
 }

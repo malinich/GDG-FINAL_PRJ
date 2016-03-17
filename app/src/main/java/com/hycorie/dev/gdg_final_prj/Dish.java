@@ -10,10 +10,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 
-public class Dish extends Product implements Parcelable{
+public class Dish extends Product{
     static final String ID = "id";
     static final String NAME = "name";
     static final String DESCRIPTION = "description";
@@ -22,7 +21,7 @@ public class Dish extends Product implements Parcelable{
     static final String SCORE = "score";
 
     private Integer mId;
-    private List<String> mIngredients;
+    private List<Product> mIngredients;
     private String mDescription;
     private String mName;
     private Uri mImage;
@@ -32,7 +31,7 @@ public class Dish extends Product implements Parcelable{
         this.setId(jo.getInt(ID));
         this.setName(jo.getString(NAME));
         this.setDescription(jo.getString(DESCRIPTION));
-        this.setIngredients(jo.getString(INGREDIENTS));
+        this.setIngredients(jo.getJSONArray(INGREDIENTS));
         this.setImage(jo.getString(IMAGE));
         this.setScore(jo.getInt(SCORE));
     }
@@ -56,17 +55,21 @@ public class Dish extends Product implements Parcelable{
         mName = name;
     }
 
-    public List<String> getIngredients() {
+    public List<Product> getIngredients() {
         return mIngredients;
     }
 
-    public void setIngredients(String items) throws JSONException{
+    public void setIngredients(JSONArray items) throws JSONException{
         mIngredients = new ArrayList<>();
-        JSONArray ja = new JSONArray(items);
 
-        for (int i = 0; i < ja.length(); i++){
-            mIngredients.add(String.valueOf(ja.get(i)));
+        for (int i = 0; i < items.length(); i++){
+            JSONObject jo = items.getJSONObject(i);
+            Ingredient in = new Ingredient(jo);
+            mIngredients.add(in);
         }
+    }
+    public void setIngredients(List<Product> ingredients) {
+        mIngredients = ingredients;
     }
 
     public String getDescription() {
@@ -97,30 +100,37 @@ public class Dish extends Product implements Parcelable{
         mScore = score;
     }
 
+    public List<String> getIngredientsName(){
+        List<String> ingredients = new ArrayList<>();
+        for (int i=0; i < this.getIngredients().size(); i++){
+            ingredients.add(this.getIngredients().get(i).getName());
+        }
+        return ingredients;
+    }
+
     @Override
     public JSONObject convertToJSON() throws JSONException{
         JSONObject jo = new JSONObject();
+        JSONArray jaIngredients = new JSONArray();
+        for (int i=0; i < getIngredients().size(); i++){
+            Product ingredient = getIngredients().get(i);
+            jaIngredients.put(ingredient.convertToJSON());
+        }
 
         jo.put(ID, mId);
         jo.put(NAME, mName);
         jo.put(DESCRIPTION, mDescription);
-        jo.put(INGREDIENTS, mIngredients);
+        jo.put(INGREDIENTS, jaIngredients);
         jo.put(IMAGE, mImage);
         jo.put(SCORE, mScore);
 
         return jo;
     }
 
-    public void setIngredients(List<String> ingredients) {
-        mIngredients = ingredients;
-    }
-
     @Override
     public String toString() {
         return getName();
     }
-
-    private int mData;
 
     // parcel
     public int describeContents() {
@@ -148,12 +158,12 @@ public class Dish extends Product implements Parcelable{
     };
 
     private Dish(Parcel in) {
-        mIngredients = new ArrayList<String>();
+        mIngredients = new ArrayList<>();
 
         this.setId(in.readInt());
         this.setName(in.readString());
         this.setDescription(in.readString());
-        in.readList(mIngredients, null);
+        in.readList(mIngredients, Ingredient.class.getClassLoader());
         this.setImage(in.readString());
         this.setScore(in.readInt());
     }

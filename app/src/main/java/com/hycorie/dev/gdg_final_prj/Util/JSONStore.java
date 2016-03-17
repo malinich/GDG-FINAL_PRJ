@@ -17,51 +17,68 @@ import java.util.List;
 
 public class JSONStore {
     private ProductSerializer<Product> mSerializer;
+    private List<Product> ingredients;
+
+    public JSONStore() {
+        this.ingredients = new ArrayList<>();
+    }
 
     public <T extends ProductSerializer<Product>>void setSerializer(T serializer) {
         mSerializer = serializer;
     }
 
     public void createIngredients(){
-        List<Product> p = new ArrayList<>();
         Ingredient p1 = new Ingredient();
         p1.setId(1);
         p1.setName("банан");
         p1.setImage(Uri.parse("android.resource://com.hycorie.dev.gdg_final_prj/" + R.drawable.ingredient_banana));
-        p.add(p1);
+        ingredients.add(p1);
 
         Ingredient p2 = new Ingredient();
         p2.setId(2);
         p2.setName("маракуйя");
         p2.setImage(Uri.parse("android.resource://com.hycorie.dev.gdg_final_prj/" + R.drawable.ingredient_passionfruit));
-        p.add(p2);
+        ingredients.add(p2);
 
         Ingredient p3 = new Ingredient();
         p3.setId(3);
         p3.setName("рыба");
         p3.setImage(Uri.parse("android.resource://com.hycorie.dev.gdg_final_prj/" + R.drawable.ingredient_fish));
-        p.add(p3);
+        ingredients.add(p3);
 
         Ingredient p4 = new Ingredient();
         p4.setId(4);
         p4.setName("морковь");
         p4.setImage(Uri.parse("android.resource://com.hycorie.dev.gdg_final_prj/" + R.drawable.ingedient_carrot));
-        p.add(p4);
+        ingredients.add(p4);
 
         Ingredient p5 = new Ingredient();
         p5.setId(5);
         p5.setName("белочка");
         p5.setImage(Uri.parse("android.resource://com.hycorie.dev.gdg_final_prj/" + R.drawable.ingredient_squirrel));
-        p.add(p5);
+        ingredients.add(p5);
 
         Ingredient p6 = new Ingredient();
         p6.setId(6);
         p6.setName("яйца");
         p6.setImage(Uri.parse("android.resource://com.hycorie.dev.gdg_final_prj/" + R.drawable.ingredient_egg));
-        p.add(p6);
+        ingredients.add(p6);
+
+        Ingredient p7 = new Ingredient();
+        p7.setId(7);
+        p7.setName("мел");
+        p7.setImage(Uri.parse("android.resource://com.hycorie.dev.gdg_final_prj/" + R.drawable.ingedient_chalk));
+        ingredients.add(p7);
+
+        Ingredient p8 = new Ingredient();
+        p8.setId(8);
+        p8.setName("малина");
+        p8.setImage(Uri.parse("android.resource://com.hycorie.dev.gdg_final_prj/" + R.drawable.ingredient_raspberry));
+        ingredients.add(p8);
+
 
         try {
-            mSerializer.save(p);
+            mSerializer.save(ingredients);
         }
         catch (IOException |JSONException e){
             throw new RuntimeException(e.toString());
@@ -75,10 +92,10 @@ public class JSONStore {
             setName("Пюре из бананов");
             setDescription("Пюре из бананов это не просто 2 кг бананов но и очень ценная кожура" +
                     " дает незаменимый вкус и помогает при переходе через атлантику в брод");
-            setIngredients(new ArrayList<String>() {{
-                add("банан");
-                add("банан");
-                add("банан");
+            setIngredients(new ArrayList<Product>() {{
+                add(ingredients.get(0));
+                add(ingredients.get(0));
+                add(ingredients.get(0));
             }});
             setScore(5);
             setImage(Uri.parse("android.resource://com.hycorie.dev.gdg_final_prj/" + R.drawable.dish_banana_puree));
@@ -90,10 +107,10 @@ public class JSONStore {
             setName("Пюре из маракуи");
             setDescription("Маракуя сама по себе не очень вкусная, но когда ее много она просто " +
                     "незабываемо помогает при хождении по потолкам");
-            setIngredients(new ArrayList<String>() {{
-                add("маракуйя");
-                add("маракуйя");
-                add("маракуйя");
+            setIngredients(new ArrayList<Product>() {{
+                add(ingredients.get(1));
+                add(ingredients.get(1));
+                add(ingredients.get(1));
             }});
             setScore(4);
             setImage(Uri.parse("android.resource://com.hycorie.dev.gdg_final_prj/"  + R.drawable.dish_passionfruit_puree));
@@ -104,10 +121,10 @@ public class JSONStore {
             setId(3);
             setName("Венегрет");
             setDescription("Какой же венегрет без селедки и веселья");
-            setIngredients(new ArrayList<String>() {{
-                add("морковь");
-                add("рыба");
-                add("белочка");
+            setIngredients(new ArrayList<Product>() {{
+                add(ingredients.get(3));
+                add(ingredients.get(5));
+                add(ingredients.get(2));
             }});
             setScore(5);
             setImage(Uri.parse("android.resource://com.hycorie.dev.gdg_final_prj/"  + R.drawable.dish_venegret));
@@ -118,10 +135,10 @@ public class JSONStore {
             setId(4);
             setName("Мел");
             setDescription("Мел едят не просто люди, а веселые люди");
-            setIngredients(new ArrayList<String>() {{
-                add("мел");
-                add("мел");
-                add("белочка");
+            setIngredients(new ArrayList<Product>() {{
+                add(ingredients.get(6));
+                add(ingredients.get(6));
+                add(ingredients.get(4));
             }});
             setScore(2);
             setImage(Uri.parse("android.resource://com.hycorie.dev.gdg_final_prj/"  + R.drawable.dish_chalk));
@@ -132,10 +149,10 @@ public class JSONStore {
             setId(5);
             setName("Маракуя по тибетски");
             setDescription("Маракую редко встретить в Тебете, но если вы ее нашли вам дорого в нирвану");
-            setIngredients(new ArrayList<String>() {{
-                add("маракуя");
-                add("маракуя");
-                add("белочка");
+            setIngredients(new ArrayList<Product>() {{
+                add(ingredients.get(1));
+                add(ingredients.get(1));
+                add(ingredients.get(4));
             }});
             setScore(4);
             setImage(Uri.parse("android.resource://com.hycorie.dev.gdg_final_prj/"  + R.drawable.dish_passion_fruit_tibet));
@@ -146,10 +163,10 @@ public class JSONStore {
             setId(6);
             setName("Бананы по-мужски");
             setDescription("Вы думаете легко приготовить бананы, а вы их пробовали сьесть живьем");
-            setIngredients(new ArrayList<String>() {{
-                add("банан");
-                add("банан");
-                add("белочка");
+            setIngredients(new ArrayList<Product>() {{
+                add(ingredients.get(0));
+                add(ingredients.get(0));
+                add(ingredients.get(4));
             }});
             setScore(3);
             setImage(Uri.parse("android.resource://com.hycorie.dev.gdg_final_prj/"  + R.drawable.dish_banan_men));
@@ -160,10 +177,10 @@ public class JSONStore {
             setId(7);
             setName("Банан-омлет");
             setDescription("Банан с омлетом просто красивый");
-            setIngredients(new ArrayList<String>() {{
-                add("банан");
-                add("яйца");
-                add("белочка");
+            setIngredients(new ArrayList<Product>() {{
+                add(ingredients.get(0));
+                add(ingredients.get(5));
+                add(ingredients.get(4));
             }});
             setScore(4);
             setImage(Uri.parse("android.resource://com.hycorie.dev.gdg_final_prj/"  + R.drawable.dish_banan_omelet));
@@ -174,10 +191,10 @@ public class JSONStore {
             setId(8);
             setName("Малина");
             setDescription("Это же малина, как ее можно не любить она всем ягода ягода");
-            setIngredients(new ArrayList<String>() {{
-                add("малина");
-                add("яйца");
-                add("белочка");
+            setIngredients(new ArrayList<Product>() {{
+                add(ingredients.get(7));
+                add(ingredients.get(7));
+                add(ingredients.get(4));
             }});
             setScore(6);
             setImage(Uri.parse("android.resource://com.hycorie.dev.gdg_final_prj/"  + R.drawable.dish_raspberry));

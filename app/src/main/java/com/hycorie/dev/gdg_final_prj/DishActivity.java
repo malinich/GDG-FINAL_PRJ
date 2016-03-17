@@ -1,16 +1,21 @@
 package com.hycorie.dev.gdg_final_prj;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.List;
 
 public class DishActivity extends AppCompatActivity {
     private Dish mDish;
@@ -35,7 +40,7 @@ public class DishActivity extends AppCompatActivity {
         ImageView imageView = (ImageView)findViewById(R.id.dish_image);
         imageView.setImageURI(mDish.getImage());
 
-        ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, mDish.getIngredients());
+        ArrayAdapter adapter = new IngredientArrayAdapter(this, R.layout.ingredient_item, mDish.getIngredients());
 
         int orientation = getResources().getConfiguration().orientation;
 
@@ -59,5 +64,31 @@ public class DishActivity extends AppCompatActivity {
         TextView score = (TextView)findViewById(R.id.dish_score);
         score.setText(mDish.getScore().toString());
 
+    }
+
+    private class IngredientArrayAdapter extends ArrayAdapter {
+        Context mContext;
+
+        public IngredientArrayAdapter(Context context, int resource, List<Product> objects) {
+            super(context, resource, objects);
+            mContext = context;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if (convertView == null){
+                LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                convertView = inflater.inflate(R.layout.ingredient_item, parent, false);
+            }
+            Ingredient item = (Ingredient)getItem(position);
+
+            TextView tv = (TextView)convertView.findViewById(R.id.ingredient_item_name);
+            tv.setText(item.getName());
+
+            ImageView iv = (ImageView)convertView.findViewById(R.id.ingredient_item_image);
+            iv.setImageURI(item.getImage());
+
+            return convertView;
+        }
     }
 }

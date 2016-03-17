@@ -1,6 +1,8 @@
 package com.hycorie.dev.gdg_final_prj;
 
 import android.net.Uri;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -66,5 +68,33 @@ public class Ingredient extends Product{
     @Override
     public String toString() {
         return getName();
+    }
+
+    // parcel
+    public int describeContents() {
+        return 0;
+    }
+
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeInt(getId());
+        out.writeString(getName());
+        out.writeString(getImage().toString());
+    }
+
+    public static final Parcelable.Creator<Ingredient> CREATOR = new Parcelable.Creator<Ingredient>() {
+
+        public Ingredient createFromParcel(Parcel in) {
+            return new Ingredient(in);
+        }
+
+        public Ingredient[] newArray(int size) {
+            return new Ingredient[size];
+        }
+    };
+
+    private Ingredient(Parcel in) {
+        this.setId(in.readInt());
+        this.setName(in.readString());
+        this.setImage(in.readString());
     }
 }
