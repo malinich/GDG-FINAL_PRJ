@@ -97,6 +97,8 @@
     <ListView
         android:paddingLeft="@dimen/vertical_margin"
         android:id="@+id/dish_ingredients_vert"
+        android:divider="@null"
+        android:dividerHeight="0dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
